@@ -30,7 +30,7 @@ describe('renderTab', function() {
     expect(svg).to.include('Intro Riff');
   });
 
-  it('SVG contains fret numbers from beats', function() {
+  it('SVG contains fret numbers from wave strings', function() {
     const source = loadFixture('intro-riff.json5');
     const parsed = parse(source);
     const svg = renderSVG(parsed);
@@ -56,15 +56,15 @@ describe('renderTab', function() {
     expect(svg).to.include('<line');
   });
 
-  it('tuning labels appear in SVG', function() {
+  it('string name labels appear in SVG', function() {
     const source = loadFixture('intro-riff.json5');
     const parsed = parse(source);
     const svg = renderSVG(parsed);
+    expect(svg).to.include('>e<');
     expect(svg).to.include('>E<');
-    expect(svg).to.include('>B<');
   });
 
-  it('bar lines are rendered', function() {
+  it('bar lines are rendered when config.bar is set', function() {
     const source = loadFixture('intro-riff.json5');
     const parsed = parse(source);
     const skin = allSkins.default;
@@ -74,15 +74,15 @@ describe('renderTab', function() {
     expect(lineCount).to.be.above(6);
   });
 
-  it('handles muted strings (x value)', function() {
+  it('handles muted strings (x value in wave)', function() {
     const source = {
-      type: 'tab',
-      name: 'Mute Test',
-      tuning: 'EADGBE',
-      bars: [
-        { beats: [
-          { strings: ['x', null, null, null, null, null] }
-        ]}
+      tab: [
+        { name: 'e', wave: '......' },
+        { name: 'B', wave: '......' },
+        { name: 'G', wave: '......' },
+        { name: 'D', wave: '......' },
+        { name: 'A', wave: '......' },
+        { name: 'E', wave: 'x.....' }
       ]
     };
     const parsed = parse(source);
@@ -90,14 +90,13 @@ describe('renderTab', function() {
     expect(svg).to.include('>x<');
   });
 
-  it('renders multiple bars with correct beat count', function() {
+  it('SVG width is based on beat count', function() {
     const source = loadFixture('intro-riff.json5');
     const parsed = parse(source);
     const skin = allSkins.default;
     const tree = renderTab(parsed, skin);
-    const totalBeats = parsed.bars.reduce((sum, b) => sum + b.beats.length, 0);
-    const numBars = parsed.bars.length;
-    const expectedW = skin.tab_margin_left + totalBeats * skin.tab_beat_w + numBars * 2 + skin.tab_margin_right;
-    expect(tree[1].width).to.be.a('number');
+    const numBeats = Math.max(...parsed.lanes.map(l => l.beats.length));
+    const expectedW = skin.tab_margin_left + numBeats * skin.tab_beat_w + skin.tab_margin_right;
+    expect(tree[1].width).to.equal(expectedW);
   });
 });

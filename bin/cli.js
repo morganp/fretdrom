@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const json5 = require('json5');
 const onml = require('onml');
-const { renderAny } = require('../lib');
+const { renderAny, parse } = require('../lib');
 const allSkins = require('../lib/all-skins');
 
 const args = process.argv.slice(2);
@@ -48,7 +48,8 @@ try {
 }
 
 const skins = allSkins;
-const tree = renderAny(0, source, skins);
+const parsed = parse(source);
+const tree = renderAny(0, parsed, skins);
 const svg = onml.s(tree);
 
 if (outputFile) {
