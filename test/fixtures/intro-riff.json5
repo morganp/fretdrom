@@ -4,16 +4,16 @@
   tuning: "EADGBE",
   bars: [
     { beats: [
-      { strings: [null, null, null, null, 2, 0] },
-      { strings: [null, null, null, null, null, 3] },
-      { strings: [null, null, null, null, 2, null] },
-      { strings: [null, null, null, null, null, 0] }
+      { strings: ["-", "-", "-", "-", 2, 0] },
+      { strings: ["-", "-", "-", "-", "-", 3] },
+      { strings: ["-", "-", "-", "-", 2, "-"] },
+      { strings: ["-", "-", "-", "-", "-", 0] }
     ]},
     { beats: [
-      { strings: [null, null, null, 2, null, null] },
-      { strings: [null, null, null, null, null, null] },
-      { strings: [null, null, null, 3, null, null] },
-      { strings: [null, null, null, null, null, null] }
+      { strings: ["-", "-", "-", 2, "-", "-"] },
+      { strings: ["-", "-", "-", "-", "-", "-"] },
+      { strings: ["-", "-", "-", 3, "-", "-"] },
+      { strings: ["-", "-", "-", "-", "-", "-"] }
     ]}
   ]
 }

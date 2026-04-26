@@ -171,16 +171,16 @@ The `grid` is one row per string, low to high. Each row is an array of fret valu
   tuning: "EADGBE",
   bars: [
     { beats: [
-      { strings: [null, null, null, null, 2, 0] },
-      { strings: [null, null, null, null, null, 3] },
-      { strings: [null, null, null, null, 2, null] },
-      { strings: [null, null, null, null, null, 0] }
+      { strings: ["-", "-", "-", "-", 2, 0] },
+      { strings: ["-", "-", "-", "-", "-", 3] },
+      { strings: ["-", "-", "-", "-", 2, "-"] },
+      { strings: ["-", "-", "-", "-", "-", 0] }
     ]},
     { beats: [
-      { strings: [null, null, null, 2, null, null] },
-      { strings: [null, null, null, null, null, null] },
-      { strings: [null, null, null, 3, null, null] },
-      { strings: [null, null, null, null, null, null] }
+      { strings: ["-", "-", "-", 2, "-", "-"] },
+      { strings: ["-", "-", "-", "-", "-", "-"] },
+      { strings: ["-", "-", "-", 3, "-", "-"] },
+      { strings: ["-", "-", "-", "-", "-", "-"] }
     ]}
   ]
 }
@@ -188,7 +188,7 @@ The `grid` is one row per string, low to high. Each row is an array of fret valu
 
 ![Intro Riff tablature](docs/images/tab_intro_riff.svg)
 
-`strings` is ordered low to high (index 0 = lowest string). Values: `null` = no note, integer = fret number, `"x"` = mute.
+`strings` is ordered low to high (index 0 = lowest string). Values: `"-"` = empty beat position (renders as dash), integer = fret number, `"x"` = mute, `null` = skip.
 
 ### Tab keys
 
