@@ -76,8 +76,8 @@ The `chord` key takes an object. Frets and fingers can be written as compact str
 ```json5
 { chord: {
   name: "C Major",
-  tuning: "EADGBE",
-  frets: "x32010",
+  tuning:  "EADGBE",
+  frets:   "x32010",
   fingers: "-32-1-"
 }}
 ```
@@ -92,8 +92,8 @@ Barre chords use the `barre` key:
 ```json5
 { chord: {
   name: "F Major (barre)",
-  frets: "111331",
-  fingers: "111341",
+  frets:   "133211",
+  fingers: "134211",
   root_strings: [1, 6],
   barre: { fret: 1, from_string: 1, to_string: 6 }
 }}
@@ -127,10 +127,10 @@ The `scale` key takes an object with a `grid` array -- one row per string, low t
   num_frets: 5,
   grid: [
     ["R", ".", ".", "x", "."],
-    [".", "x", ".", ".", "."],
-    [".", ".", "x", ".", "."],
-    ["x", ".", ".", ".", "x"],
-    [".", ".", "x", ".", "."],
+    ["x", ".", "x", ".", "."],
+    ["x", ".", "x", ".", "."],
+    ["x", ".", "x", ".", "."],
+    ["x", ".", "x", ".", "."],
     ["R", ".", ".", "x", "."]
   ]
 }}
