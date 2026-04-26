@@ -76,8 +76,8 @@ describe('renderChord', function() {
     const skin = allSkins.default;
     const tree = renderChord(parsed, skin);
     const numStrings = parsed.frets.length;
-    const expectedW = skin.chord_margin_left + (numStrings - 1) * skin.chord_cell_w + skin.chord_margin_right;
-    const expectedH = skin.chord_margin_top + skin.chord_num_frets * skin.chord_cell_h + skin.chord_margin_bottom;
+    const expectedW = skin.chord_margin_left + (numStrings - 1) * skin.cell_w + skin.chord_margin_right;
+    const expectedH = skin.chord_margin_top + skin.chord_num_frets * skin.cell_h + skin.chord_margin_bottom;
     expect(tree[1].width).to.equal(expectedW);
     expect(tree[1].height).to.equal(expectedH);
   });

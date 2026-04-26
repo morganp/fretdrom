@@ -69,7 +69,7 @@ describe('renderScale', function() {
     const skin = allSkins.default;
     const tree = renderScale(parsed, skin);
     const numStrings = parsed.grid.length;
-    const expectedW = skin.scale_margin_left + (numStrings - 1) * skin.scale_cell_w + skin.scale_margin_right;
+    const expectedW = skin.scale_margin_left + (numStrings - 1) * skin.cell_w + skin.scale_margin_right;
     expect(tree[1].width).to.equal(expectedW);
   });
 
