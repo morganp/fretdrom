@@ -1,0 +1,7 @@
+{
+  type: "chord",
+  name: "C Major",
+  tuning: "EADGBE",
+  frets: ["x", 3, 2, 0, 1, 0],
+  fingers: [null, 3, 2, null, 1, null]
+}

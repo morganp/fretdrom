@@ -1,0 +1,19 @@
+{
+  type: "tab",
+  name: "Intro Riff",
+  tuning: "EADGBE",
+  bars: [
+    { beats: [
+      { strings: [null, null, null, null, 2, 0] },
+      { strings: [null, null, null, null, null, 3] },
+      { strings: [null, null, null, null, 2, null] },
+      { strings: [null, null, null, null, null, 0] }
+    ]},
+    { beats: [
+      { strings: [null, null, null, 2, null, null] },
+      { strings: [null, null, null, null, null, null] },
+      { strings: [null, null, null, 3, null, null] },
+      { strings: [null, null, null, null, null, null] }
+    ]}
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "fretdrom",
+  "version": "0.1.0",
+  "description": "Chord and scale diagrams for stringed instruments, rendered as SVG",
+  "main": "./lib/index.js",
+  "bin": { "fretdrom": "bin/cli.js" },
+  "scripts": {
+    "test":     "mocha test",
+    "lint":     "eslint lib/*.js bin/*.js skins/*.js",
+    "dist":     "esbuild ./lib/fretdrom.js --bundle --format=iife --global-name=FretDrom --outfile=dist/fretdrom.js",
+    "dist.min": "esbuild ./lib/fretdrom.js --bundle --format=iife --global-name=FretDrom --minify --outfile=dist/fretdrom.min.js",
+    "build":    "npm run dist && npm run dist.min"
+  },
+  "dependencies": {
+    "json5": "^2.2.3",
+    "onml": "^2.1.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.0",
+    "mocha": "^11.7.5",
+    "chai": "^6.2.2"
+  }
+}
