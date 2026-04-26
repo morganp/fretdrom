@@ -88,6 +88,8 @@ Fretdrom finds all `<script type="fretdrom">` elements and replaces each with an
 }
 ```
 
+![C Major chord diagram](docs/images/chord_c_major.svg)
+
 Barre chords use the `barre` key:
 
 ```json5
@@ -101,6 +103,8 @@ Barre chords use the `barre` key:
   barre: { fret: 1, from_string: 1, to_string: 6 }
 }
 ```
+
+![F Major barre chord diagram](docs/images/chord_f_barre.svg)
 
 ### Chord keys
 
@@ -135,6 +139,8 @@ Barre chords use the `barre` key:
   ]
 }
 ```
+
+![A Minor Pentatonic scale diagram](docs/images/scale_a_minor_penta.svg)
 
 The `grid` is one row per string, low to high. Each row is an array of fret values. Column 0 = `start_fret`, column 1 = `start_fret + 1`, and so on.
 
@@ -180,6 +186,8 @@ The `grid` is one row per string, low to high. Each row is an array of fret valu
 }
 ```
 
+![Intro Riff tablature](docs/images/tab_intro_riff.svg)
+
 `strings` is ordered low to high (index 0 = lowest string). Values: `null` = no note, integer = fret number, `"x"` = mute.
 
 ### Tab keys
@@ -200,6 +208,8 @@ Set `tuning` to match your instrument. String count is inferred from the tuning 
 { type: "chord", name: "E (bass)", tuning: "EADG", frets: [0, 2, 2, 1], fingers: [null, 2, 3, 1], root_strings: [1] }
 ```
 
+![E bass chord diagram](docs/images/chord_bass_e.svg)
+
 Common tunings: `BEADG` (5-string bass), `GCEA` (ukulele), `GDAE` (mandola), `DADGAD` (open D).
 
 ---
@@ -216,6 +226,8 @@ The `config.skin` key selects a colour scheme:
   config: { skin: "dark" }
 }
 ```
+
+![C Major dark skin](docs/images/chord_c_major_dark.svg)
 
 | Skin | Description |
 |------|-------------|
