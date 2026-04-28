@@ -127,7 +127,7 @@ The `scale` key takes an object with a `grid` array -- one row per string, low t
   num_frets: 5,
   grid: [
     ["R", ".", ".", "x", "."],
-    ["x", ".", "x", ".", "."],
+    ["x", ".", ".", "x", "."],
     ["x", ".", "x", ".", "."],
     ["x", ".", "x", ".", "."],
     ["x", ".", "x", ".", "."],
