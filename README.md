@@ -101,11 +101,22 @@ Barre chords use the `barre` key:
 
 ![F Major barre chord diagram](docs/images/chord_f_barre.svg)
 
+Use `subtitle` to show intervals or any short annotation below the title:
+
+```json5
+{ chord: {
+  name: "C Major",
+  subtitle: "1 - 3 - 5",
+  frets: "x32010"
+}}
+```
+
 ### Chord keys
 
 | Key | Description | Default |
 |-----|-------------|---------|
 | `name` | Diagram title | _(none)_ |
+| `subtitle` | Second line below the title (e.g., intervals `1 - 3 - 5`) | _(none)_ |
 | `tuning` | String names low to high | `EADGBE` |
 | `frets` | Fret per string, low to high (string or array) | required |
 | `fingers` | Finger number per string (string or array, `-`/`null` = omit) | _(none)_ |
@@ -140,6 +151,18 @@ The `scale` key takes an object with a `grid` array -- one row per string, low t
 
 Strings are columns along the top; fret numbers label each row down the left side. Fret position markers (3, 5, 7, 9, 12 ...) appear on the right.
 
+Use `subtitle` to label the scale intervals below the title:
+
+```json5
+{ scale: {
+  name: "A Minor Pentatonic",
+  subtitle: "R  b3  4  5  b7",
+  start_fret: 5,
+  num_frets: 5,
+  grid: [ ... ]
+}}
+```
+
 | Cell value | Meaning |
 |------------|---------|
 | `"R"` or `"r"` | Root note -- rendered in accent colour |
@@ -151,6 +174,7 @@ Strings are columns along the top; fret numbers label each row down the left sid
 | Key | Description | Default |
 |-----|-------------|---------|
 | `name` | Diagram title | _(none)_ |
+| `subtitle` | Second line below the title (e.g., intervals `R  b3  4  5  b7`) | _(none)_ |
 | `tuning` | String names low to high | `EADGBE` |
 | `start_fret` | Fret number of the first row | `1` |
 | `num_frets` | Height of the box in frets | `6` |

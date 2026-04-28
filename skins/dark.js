@@ -12,8 +12,9 @@ module.exports = {
     title_size: 14, label_size: 11, dot_text_size: 11, tab_num_size: 12,
     cell_w: 40, cell_h: 40, dot_r: 12,
     chord_num_frets: 5,
-    chord_margin_top: 50, chord_margin_left: 40, chord_margin_right: 20, chord_margin_bottom: 30,
-    scale_margin_top: 50, scale_margin_left: 40, scale_margin_right: 30, scale_margin_bottom: 20,
+    subtitle_size: 11,
+    chord_margin_top: 70, chord_margin_left: 40, chord_margin_right: 20, chord_margin_bottom: 30,
+    scale_margin_top: 70, scale_margin_left: 40, scale_margin_right: 30, scale_margin_bottom: 20,
     tab_string_spacing: 16, tab_beat_w: 40,
     tab_margin_left: 40, tab_margin_right: 20, tab_margin_top: 40, tab_margin_bottom: 10
   }
