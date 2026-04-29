@@ -1,0 +1,1 @@
+{ chord: { name: "F Major", subtitle: "1 - 3 - 5", frets: "133211", fingers: "134211", root_strings: [1, 6], barre: { fret: 1, from_string: 1, to_string: 6 } } }

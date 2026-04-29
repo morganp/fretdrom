@@ -1,0 +1,17 @@
+{
+  scale: {
+    name: "G Major Scale",
+    subtitle: "R  2  3  4  5  6  7",
+    tuning: "EADGBE",
+    start_fret: 3,
+    num_frets: 5,
+    grid: [
+      ["R", ".", "x", ".", "x"],
+      ["x", ".", "x", ".", "x"],
+      [".", "x", "R", ".", "x"],
+      [".", "x", "x", ".", "x"],
+      ["x", ".", "x", ".", "x"],
+      ["R", ".", "x", ".", "x"]
+    ]
+  }
+}

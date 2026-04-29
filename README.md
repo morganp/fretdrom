@@ -124,6 +124,8 @@ Use `subtitle` to show intervals or any short annotation below the title:
 | `start_fret` | First fret shown. `1` draws a nut; higher values show a fret indicator | `1` |
 | `barre` | `{fret, from_string, to_string}` -- draws a barre bar | _(none)_ |
 
+See [docs/chords.md](docs/chords.md) for more chord examples with interval and finger subtitles.
+
 ---
 
 ## Scale diagrams
@@ -179,6 +181,8 @@ Use `subtitle` to label the scale intervals below the title:
 | `start_fret` | Fret number of the first row | `1` |
 | `num_frets` | Height of the box in frets | `6` |
 | `grid` | Array of rows, one per string | required |
+
+See [docs/scales.md](docs/scales.md) for more scale examples with interval subtitles.
 
 ---
 
