@@ -117,8 +117,7 @@ Use `intervals` to label each string's harmonic role inside the dots. When `inte
 { chord: {
   name: "E Major",
   frets:     "022100",
-  intervals: [null, "5", "R", "3", null, null],
-  root_strings: [1, 3]
+  intervals: ["R", "5", "R", "3", "5", "R"]
 }}
 ```
 
