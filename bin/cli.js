@@ -49,7 +49,7 @@ try {
 
 const skins = allSkins;
 const parsed = parse(source);
-const tree = renderAny(0, parsed, skins);
+const tree = renderAny(0, parsed, skins, skinName);
 const svg = onml.s(tree);
 
 if (outputFile) {
