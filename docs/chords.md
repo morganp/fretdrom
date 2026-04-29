@@ -133,8 +133,7 @@ Use `intervals` instead of `fingers` to show each string's harmonic role inside 
 { chord: {
   name: "E Major",
   frets:     "022100",
-  intervals: [null, "5", "R", "3", null, null],
-  root_strings: [1, 3]
+  intervals: ["R", "5", "R", "3", "5", "R"]
 }}
 ```
 
@@ -146,8 +145,7 @@ Use `intervals` instead of `fingers` to show each string's harmonic role inside 
 { chord: {
   name: "A Minor",
   frets:     "x02210",
-  intervals: [null, null, "5", "R", "b3", null],
-  root_strings: [4]
+  intervals: [null, "R", "5", "R", "b3", "5"]
 }}
 ```
 
