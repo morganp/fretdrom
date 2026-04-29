@@ -19,11 +19,11 @@ module.exports = {
     label_color:     '#5a4a3a',
     fret_marker_color: '#9a8a7a',
     sketch:          true,
-    sketch_amplitude: 1.5
+    sketch_amplitude: 2.5
   }),
   'sketch-dark': Object.assign({}, dark, {
     bg_color: '#1a1a24',
     sketch:          true,
-    sketch_amplitude: 1.5
+    sketch_amplitude: 2.5
   })
 };
