@@ -1,6 +1,6 @@
 # Scale Diagrams
 
-Scale diagrams support a `subtitle` key for displaying scale intervals below the title.
+Scale diagrams support a `subtitle` key for a text annotation below the title. Grid cells can also hold interval names directly to label each dot -- when they do, the subtitle defaults to `"Intervals"` automatically.
 
 ---
 
@@ -60,9 +60,43 @@ This is the standard three-notes-per-string pattern in position 2 (starting at f
 
 ---
 
-## Subtitle options
+## Interval labels in dots
 
-The `subtitle` field is a free-form string. Common uses:
+Replace `"x"` with the interval name to label each dot. The subtitle auto-shows `"Intervals"`. Set `subtitle: false` to suppress it.
+
+### A Minor Pentatonic (interval labels)
+
+```json5
+{ scale: {
+  name: "A Minor Pentatonic",
+  start_fret: 5,
+  num_frets: 4,
+  grid: [
+    ["R",  ".", ".", "b3"],
+    ["4",  ".", "5", "." ],
+    ["b7", ".", "R", "." ],
+    ["b3", ".", "4", "." ],
+    ["5",  ".", ".", "b7"],
+    ["R",  ".", ".", "b3"]
+  ]
+}}
+```
+
+![A Minor Pentatonic interval labels](images/scale_a_minor_penta_intervals.svg)
+
+Any string other than `"R"`, `"x"`, `"."`, `"-"` is treated as an interval label and shown inside the dot. Root cells still use the accent colour; all other interval cells use the standard dot colour.
+
+---
+
+## Subtitle and label options
+
+| Situation | Result |
+|-----------|--------|
+| Grid has interval labels, no `subtitle` | subtitle auto-shows `"Intervals"` |
+| `subtitle: "text"` | shows that text regardless |
+| `subtitle: false` | subtitle hidden even when interval labels present |
+
+Common `subtitle` values:
 
 | Use | Example value |
 |-----|---------------|
@@ -77,6 +111,7 @@ The `subtitle` field is a free-form string. Common uses:
 
 | Cell | Meaning |
 |------|---------|
-| `"R"` or `"r"` | Root note, rendered in accent colour |
-| `"x"` or `"X"` | Scale note, filled dot |
+| `"R"` or `"r"` | Root note, accent colour, `R` label |
+| `"x"` or `"X"` | Scale note, filled dot, no label |
+| `"b3"`, `"4"`, `"b7"` etc. | Scale note with interval label in the dot |
 | `"."` or `"-"` | Not in scale, empty position |

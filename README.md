@@ -111,15 +111,31 @@ Use `subtitle` to show intervals or any short annotation below the title:
 }}
 ```
 
+Use `intervals` to label each string's harmonic role inside the dots. When `intervals` is present without an explicit `subtitle`, the subtitle automatically shows `"Intervals"`. Set `subtitle: false` to suppress it.
+
+```json5
+{ chord: {
+  name: "E Major",
+  frets:     "022100",
+  intervals: [null, "5", "R", "3", null, null],
+  root_strings: [1, 3]
+}}
+```
+
+![E Major interval labels](docs/images/chord_e_major_intervals.svg)
+
+`intervals` is an array -- one entry per string, low to high. Use `null` or omit entries for strings with no label (open strings, muted strings, or fretted strings you want unlabelled).
+
 ### Chord keys
 
 | Key | Description | Default |
 |-----|-------------|---------|
 | `name` | Diagram title | _(none)_ |
-| `subtitle` | Second line below the title (e.g., intervals `1 - 3 - 5`) | _(none)_ |
+| `subtitle` | Second line below the title. Set to `false` to disable; auto-shows `"Intervals"` when `intervals` is in use | _(none)_ |
 | `tuning` | String names low to high | `EADGBE` |
 | `frets` | Fret per string, low to high (string or array) | required |
 | `fingers` | Finger number per string (string or array, `-`/`null` = omit) | _(none)_ |
+| `intervals` | Interval label per string, low to high (array, `null` = omit). Takes priority over `fingers` for dot labels | _(none)_ |
 | `root_strings` | 1-indexed string numbers to show in accent colour | _(none)_ |
 | `start_fret` | First fret shown. `1` draws a nut; higher values show a fret indicator | `1` |
 | `barre` | `{fret, from_string, to_string}` -- draws a barre bar | _(none)_ |
@@ -165,10 +181,31 @@ Use `subtitle` to label the scale intervals below the title:
 }}
 ```
 
+Use interval names directly as grid cell values to label each dot. Any cell value other than `"R"`/`"x"`/`"."`/`"-"` is treated as an interval label and shown inside the dot. When interval-labelled cells are present and no explicit `subtitle` is set, the subtitle automatically shows `"Intervals"`.
+
+```json5
+{ scale: {
+  name: "A Minor Pentatonic",
+  start_fret: 5,
+  num_frets: 4,
+  grid: [
+    ["R",  ".", ".", "b3"],
+    ["4",  ".", "5", "." ],
+    ["b7", ".", "R", "." ],
+    ["b3", ".", "4", "." ],
+    ["5",  ".", ".", "b7"],
+    ["R",  ".", ".", "b3"]
+  ]
+}}
+```
+
+![A Minor Pentatonic interval labels](docs/images/scale_a_minor_penta_intervals.svg)
+
 | Cell value | Meaning |
 |------------|---------|
-| `"R"` or `"r"` | Root note -- rendered in accent colour |
-| `"x"` or `"X"` | Scale note -- filled dot |
+| `"R"` or `"r"` | Root note -- rendered in accent colour with `R` label |
+| `"x"` or `"X"` | Scale note -- filled dot, no label |
+| `"b3"`, `"4"`, `"b7"` etc. | Scale note with interval label inside the dot |
 | `"."` or `"-"` | Not in scale -- empty |
 
 ### Scale keys
