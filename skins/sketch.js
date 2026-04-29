@@ -18,12 +18,14 @@ module.exports = {
     title_color:     '#2a2318',
     label_color:     '#5a4a3a',
     fret_marker_color: '#9a8a7a',
-    sketch:          true,
-    sketch_amplitude: 2.5
+    sketch:           true,
+    sketch_amplitude: 1.25,
+    string_width_low: 3
   }),
   'sketch-dark': Object.assign({}, dark, {
-    bg_color: '#1a1a24',
-    sketch:          true,
-    sketch_amplitude: 2.5
+    bg_color:         '#1a1a24',
+    sketch:           true,
+    sketch_amplitude: 1.25,
+    string_width_low: 3
   })
 };

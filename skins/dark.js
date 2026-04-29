@@ -7,7 +7,7 @@ module.exports = {
     open_color: '#cccccc', muted_color: '#888888', barre_color: '#cccccc',
     fret_marker_color: '#444444', title_color: '#eeeeee', label_color: '#aaaaaa',
     tab_line_color: '#cccccc', tab_num_color: '#eeeeee',
-    string_width: 1.5, fret_width: 1, nut_width: 4, bar_line_width: 2,
+    string_width: 1.5, string_width_low: 3, low_string: 1, fret_width: 1, nut_width: 4, bar_line_width: 2,
     font_family: 'Helvetica, Arial, sans-serif',
     title_size: 14, label_size: 11, dot_text_size: 11, tab_num_size: 12,
     cell_w: 40, cell_h: 40, dot_r: 12,
