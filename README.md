@@ -299,6 +299,8 @@ The `--skin` flag applies the same way on the CLI:
 fretdrom -i chord.json5 --skin sketch > chord.svg
 ```
 
+See [docs/skins.md](docs/skins.md) for a side-by-side comparison of all skins across chord, scale, and tab diagrams.
+
 ---
 
 ## Node.js API
