@@ -4,6 +4,12 @@
   "description": "Chord and scale diagrams for stringed instruments, rendered as SVG",
   "main": "./lib/index.js",
   "bin": { "fretdrom": "bin/cli.js" },
+  "files": [
+    "bin/",
+    "lib/",
+    "skins/",
+    "README.md"
+  ],
   "scripts": {
     "test":     "mocha test",
     "lint":     "eslint lib/*.js bin/*.js skins/*.js",
