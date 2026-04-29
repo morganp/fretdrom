@@ -280,10 +280,24 @@ The `config.skin` key selects a colour scheme:
 
 ![C Major dark skin](docs/images/chord_c_major_dark.svg)
 
+```json5
+{ chord: { name: "C Major", frets: "x32010", config: { skin: "sketch" } } }
+```
+
+![C Major sketch skin](docs/images/chord_c_major_sketch.svg)
+
 | Skin | Description |
 |------|-------------|
 | `default` | Light background, charcoal lines, red root notes |
 | `dark` | Dark background, light lines, bright red root notes |
+| `sketch` | Warm off-white background, hand-drawn wobbly lines |
+| `sketch-dark` | Dark background with hand-drawn style |
+
+The `--skin` flag applies the same way on the CLI:
+
+```bash
+fretdrom -i chord.json5 --skin sketch > chord.svg
+```
 
 ---
 
