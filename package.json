@@ -15,7 +15,8 @@
     "lint":     "eslint lib/*.js bin/*.js skins/*.js",
     "dist":     "esbuild ./lib/fretdrom.js --bundle --format=iife --global-name=FretDrom --outfile=dist/fretdrom.js",
     "dist.min": "esbuild ./lib/fretdrom.js --bundle --format=iife --global-name=FretDrom --minify --outfile=dist/fretdrom.min.js",
-    "build":    "npm run dist && npm run dist.min"
+    "build":    "npm run dist && npm run dist.min",
+    "build-editor": "npm run build && cp editor/index.html dist/ && cp -r editor/js dist/"
   },
   "dependencies": {
     "json5": "^2.2.3",
