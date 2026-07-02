@@ -109,6 +109,33 @@ describe('renderChord', function() {
     expect(svg).to.include('2');
   });
 
+  it('positions window from min fret when min is exactly 5', function() {
+    const source = {
+      type: 'chord',
+      name: 'D Barre',
+      tuning: 'EADGBE',
+      frets: ['x', 5, 7, 7, 7, 5]
+    };
+    const parsed = parse(source);
+    const svg = renderSVG(parsed);
+    expect(svg).to.match(/<text[^>]*>5<\/text>/);
+    const dots = (svg.match(/<circle/g) || []).length;
+    expect(dots).to.equal(5);
+  });
+
+  it('honours explicit start_fret over the computed window', function() {
+    const source = {
+      type: 'chord',
+      name: 'D Barre',
+      tuning: 'EADGBE',
+      frets: ['x', 5, 7, 7, 7, 5],
+      start_fret: 4
+    };
+    const parsed = parse(source);
+    const svg = renderSVG(parsed);
+    expect(svg).to.match(/<text[^>]*>4<\/text>/);
+  });
+
   it('renders root note dots in root_color', function() {
     const source = {
       type: 'chord',
