@@ -27,6 +27,11 @@ describe('parse', function() {
     expect(result.tuning).to.equal('DADGBE');
   });
 
+  it('strips octave markers from tuning', function() {
+    const result = parse({ chord: { frets: [0, 1, 2, 3, 2, 1], tuning: 'E2 A2 D3 G3 B3 E4' } });
+    expect(result.tuning).to.equal('EADGBE');
+  });
+
   describe('chord', function() {
     it('throws if frets missing', function() {
       expect(() => parse({ chord: {} })).to.throw(/frets/);
