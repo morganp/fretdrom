@@ -14,6 +14,7 @@ module.exports = {
     chord_num_frets: 5,
     subtitle_size: 11,
     chord_margin_top: 70, chord_margin_left: 40, chord_margin_right: 20, chord_margin_bottom: 30,
+    chord_row_gap: 16,
     scale_margin_top: 70, scale_margin_left: 40, scale_margin_right: 30, scale_margin_bottom: 20,
     tab_string_spacing: 16, tab_beat_w: 40,
     tab_margin_left: 40, tab_margin_right: 20, tab_margin_top: 40, tab_margin_bottom: 10

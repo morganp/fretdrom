@@ -141,6 +141,48 @@ Use `intervals` to label each string's harmonic role inside the dots. When `inte
 
 See [docs/chords.md](docs/chords.md) for more chord examples with interval and finger subtitles.
 
+### Chord rows
+
+The `chords` key takes an array of chord objects and renders them side by side in a single wide SVG. Use it instead of placing several diagrams next to each other with page-level HTML and CSS.
+
+```json5
+{
+  tuning: "EADGBE",
+  chords: [
+    { name: "A Minor", frets: "x02210", fingers: "--231-" },
+    { name: "C Major", frets: "x32010", fingers: "-32-1-" },
+    { name: "G Major", frets: "320003", fingers: "21---3" }
+  ]
+}
+```
+
+![A Minor, C Major and G Major side by side](docs/images/chord_row.svg)
+
+Every chord key listed above works inside an entry. A top-level `tuning` applies to all entries that do not set their own, so a row can mix instruments:
+
+```json5
+{
+  chords: [
+    { name: "E (Bass)", tuning: "EADG", frets: "0221" },
+    { name: "E Major",  tuning: "EADGBE", frets: "022100" }
+  ]
+}
+```
+
+A top-level `config` styles the whole row, and an entry can override it with its own `config` -- handy for highlighting one chord in a sequence:
+
+```json5
+{
+  config: { skin: "sketch" },
+  chords: [
+    { name: "A Minor", frets: "x02210" },
+    { name: "C Major", frets: "x32010", config: { skin: "sketch-dark" } }
+  ]
+}
+```
+
+The `chord_row_gap` skin key sets the space between diagrams (default `16`). Each diagram keeps its own margins, so the visible gap is that value plus the two margins.
+
 ---
 
 ## Scale diagrams

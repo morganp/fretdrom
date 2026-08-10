@@ -1,0 +1,8 @@
+{
+  tuning: "EADGBE",
+  chords: [
+    { name: "A Minor", frets: "x02210", fingers: "--231-" },
+    { name: "C Major", frets: "x32010", fingers: "-32-1-" },
+    { name: "G Major", frets: "320003", fingers: "21---3" }
+  ]
+}

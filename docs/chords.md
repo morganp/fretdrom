@@ -155,6 +155,46 @@ Use `intervals` instead of `fingers` to show each string's harmonic role inside 
 
 ---
 
+## Chord rows
+
+Several chords in one wide SVG, no page-level layout needed.
+
+```json5
+{
+  tuning: "EADGBE",
+  chords: [
+    { name: "A Minor", frets: "x02210", fingers: "--231-" },
+    { name: "C Major", frets: "x32010", fingers: "-32-1-" },
+    { name: "G Major", frets: "320003", fingers: "21---3" }
+  ]
+}
+```
+
+![A Minor, C Major, G Major](images/chord_row.svg)
+
+Each entry takes the same keys as a standalone chord. The row's `tuning` is the default for entries that omit one, and `chord_row_gap` controls the spacing between diagrams.
+
+---
+
+### Chord row (sketch)
+
+```json5
+{
+  config: { skin: "sketch" },
+  chords: [
+    { name: "A Minor", frets: "x02210", fingers: "--231-" },
+    { name: "C Major", frets: "x32010", fingers: "-32-1-" },
+    { name: "G Major", frets: "320003", fingers: "21---3" }
+  ]
+}
+```
+
+![A Minor, C Major, G Major in sketch skin](images/chord_row_sketch.svg)
+
+An entry may carry its own `config` to override the row's skin for that diagram alone.
+
+---
+
 ## Subtitle and label options
 
 | Situation | Result |
