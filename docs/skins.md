@@ -46,9 +46,56 @@ Warm off-white background with hand-drawn wobbly lines. Fret wires, strings, and
 
 Dark background with the same hand-drawn line style.
 
-| Chord | Barre | Scale |
-|-------|-------|-------|
-| ![C Major sketch dark](images/chord_c_major_sketch_dark.svg) | ![F Major sketch dark](images/chord_f_barre_sketch_dark.svg) | ![A Minor Pentatonic sketch dark](images/scale_a_minor_penta_sketch_dark.svg) |
+| Chord | Barre | Scale | Tab |
+|-------|-------|-------|-----|
+| ![C Major sketch dark](images/chord_c_major_sketch_dark.svg) | ![F Major sketch dark](images/chord_f_barre_sketch_dark.svg) | ![A Minor Pentatonic sketch dark](images/scale_a_minor_penta_sketch_dark.svg) | ![Intro Riff sketch dark](images/tab_intro_riff_sketch_dark.svg) |
+
+---
+
+## Chord rows
+
+A `chords` row inherits the skin of the whole diagram, so one `config.skin` styles every chord in it. Rows are too wide for a side-by-side table, so the four skins are stacked here.
+
+```json5
+{
+  config: { skin: "sketch" },
+  chords: [
+    { name: "A Minor", frets: "x02210", fingers: "--231-" },
+    { name: "C Major", frets: "x32010", fingers: "-32-1-" },
+    { name: "G Major", frets: "320003", fingers: "21---3" }
+  ]
+}
+```
+
+**default**
+
+![Chord row default](images/chord_row.svg)
+
+**dark**
+
+![Chord row dark](images/chord_row_dark.svg)
+
+**sketch**
+
+![Chord row sketch](images/chord_row_sketch.svg)
+
+**sketch-dark**
+
+![Chord row sketch dark](images/chord_row_sketch_dark.svg)
+
+An entry can carry its own `config` to override the row's skin for that diagram alone -- useful for picking out one chord in a progression:
+
+```json5
+{
+  config: { skin: "sketch" },
+  chords: [
+    { name: "A Minor", frets: "x02210" },
+    { name: "C Major", frets: "x32010", config: { skin: "sketch-dark" } }
+  ]
+}
+```
+
+The gap between diagrams is the `chord_row_gap` skin key (default `16`), on top of each diagram's own margins.
 
 ---
 
