@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "test": "mocha test",
-    "lint": "eslint lib/*.js bin/*.js skins/*.js",
+    "lint": "eslint lib bin skins test eslint.config.js",
     "dist": "esbuild ./lib/fretdrom.js --bundle --format=iife --global-name=FretDrom --outfile=dist/fretdrom.js",
     "dist.min": "esbuild ./lib/fretdrom.js --bundle --format=iife --global-name=FretDrom --minify --outfile=dist/fretdrom.min.js",
     "build": "npm run dist && npm run dist.min",
@@ -25,8 +25,9 @@
     "onml": "^2.1.0"
   },
   "devDependencies": {
+    "chai": "^6.2.2",
     "esbuild": "^0.28.0",
-    "mocha": "^11.7.5",
-    "chai": "^6.2.2"
+    "eslint": "^10.8.1",
+    "mocha": "^11.7.5"
   }
 }
