@@ -4,15 +4,27 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
-### Fixed
+## [0.4.1] - 2026-10-25
 
-- README script tag now loads the bundle from the `dist` branch through jsDelivr. The old unpkg URL returned 404 because the npm package did not include `dist/`.
-- `dist/` is now in the npm `files` list and `prepublishOnly` builds it, so `unpkg.com/fretdrom/dist/fretdrom.min.js` works from the next npm release.
+No change to the input syntax or to rendered output.
 
 ### Added
 
+- Snapshot tests: every fixture is rendered in every skin and compared byte for byte with `test/snapshots` (`npm run update-snapshots`).
+- `scripts/render-fixtures.js` generates `docs/images` (`npm run docs`) and `test/snapshots` from `test/fixtures`. It fails on a fixture that does not render, an orphan image, or a README or docs reference to an image no fixture produces.
+- CI workflow (`ci.yml`): lint, test and build on Node 20 and 22, plus a check that docs images and snapshots are current.
+- `CONTRIBUTING.md` and `CLAUDE.md`.
+- `examples/index.html`: gallery of chords, scales and tabs that loads the hosted bundle, or the local one with `?local`.
+- The Deploy dist workflow lints and tests before deploying, writes `BUILD.txt`, purges the jsDelivr cache and pins each release tag as `dist-vX.Y.Z`. README documents the pinned form.
+- `docs/` in the npm package `files`, and `docs` and `update-snapshots` scripts.
 - `LICENSE` (MIT) and `license` field in `package.json`.
 - This changelog, reconstructed from the git history.
+
+### Fixed
+
+- README script tag loads the bundle from the `dist` branch through jsDelivr. The old unpkg URL returned 404 because the npm package did not include `dist/`.
+- `dist/` is in the npm `files` list and `prepublishOnly` builds it, so `unpkg.com/fretdrom/dist/fretdrom.min.js` works from this npm release.
+- Docs images are generated from the fixtures. Six hand-made images (C major, F major barre, E minor, D major, G major chords and the G major scale) predated the thicker nut and the string taper and showed old output. Image file names are now the fixture names (`c_major.svg`, `c_major_dark.svg`); the `chord_*`, `scale_*` and `tab_*` copies were removed.
 
 ## [0.4.0] - 2026-08-10
 
@@ -65,7 +77,8 @@ All notable changes to this project are documented here. The format follows [Kee
 - Scale orientation and tab dash handling.
 - A Minor intervals and the barre chord and pentatonic scale examples.
 
-[Unreleased]: https://github.com/morganp/fretdrom/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/morganp/fretdrom/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/morganp/fretdrom/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/morganp/fretdrom/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/morganp/fretdrom/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/morganp/fretdrom/releases/tag/v0.2.0

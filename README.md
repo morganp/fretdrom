@@ -67,6 +67,14 @@ fretdrom -i chord.json5 | npx @resvg/resvg-js-cli - chord.png
 
 Fretdrom finds all `<script type="fretdrom">` elements and replaces each with an inline SVG.
 
+`@dist` is a moving ref that tracks the latest build of `main` (CI asks jsDelivr to refresh it after each deploy, but a CDN edge can lag briefly). For a page you do not want to change under you, pin a release with the immutable ref `@dist-v0.4.1`:
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/morganp/fretdrom@dist-v0.4.1/fretdrom.min.js" type="text/javascript"></script>
+```
+
+For development, `npm run build` writes the bundles to `dist/` and `examples/index.html` can load `../dist/fretdrom.js` when opened with `?local`.
+
 ---
 
 ## Chord diagrams
@@ -353,6 +361,12 @@ const { renderSVG } = require('fretdrom');
 const svg = renderSVG({ chord: { name: 'C Major', frets: 'x32010' } });
 // svg is a string of SVG markup
 ```
+
+---
+
+## Contributing
+
+The images under `docs/images` and the snapshots under `test/snapshots` are generated from `test/fixtures`; never edit them by hand. After a render change run `npm run docs` and `npm run update-snapshots` and commit the result, as CI checks they are current. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, tests and the release steps.
 
 ---
 

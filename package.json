@@ -1,6 +1,6 @@
 {
   "name": "fretdrom",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "license": "MIT",
   "description": "Chord and scale diagrams for stringed instruments, rendered as SVG",
   "main": "./lib/index.js",
@@ -12,6 +12,7 @@
     "lib/",
     "skins/",
     "dist/",
+    "docs/",
     "README.md",
     "LICENSE",
     "CHANGELOG.md"
