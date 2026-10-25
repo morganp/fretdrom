@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Fretdrom Editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/json5@2.2.3/dist/index.min.js"></script>
+<script src="js/music.js"></script>
+<script src="fretdrom.js"></script>
+<style>
+:root{
+  --bg:        #f6f2ec;
+  --paper:     #fbf8f3;
+  --ink:       #1f1d1a;
+  --ink-2:     #4a4641;
+  --ink-3:     #8a847b;
+  --rule:      #d9d3c8;
+  --rule-2:    #ebe5d8;
+  --accent:    #b94a3a;     /* warm red, matches fretdrom roots */
+  --accent-2:  #1f1d1a;
+  --warn:      #c47a1a;
+  --ok:        #4a7a3a;
+  --code-bg:   #f1ece1;
+  --code-sel:  #ead9b8;
+  --shadow:    0 1px 0 rgba(31,29,26,.04), 0 8px 24px -16px rgba(31,29,26,.18);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:13px;line-height:1.45;-webkit-font-smoothing:antialiased}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+
+/* ============ APP SHELL ============ */
+.app{
+  display:grid;
+  grid-template-rows: 48px auto 1fr;
+  height:100vh;
+  min-height:0;
+}
+
+/* ============ TITLEBAR ============ */
+.titlebar{
+  display:flex;align-items:center;gap:14px;
+  padding:0 14px;
+  border-bottom:1px solid var(--rule);
+  background:var(--paper);
+  position:relative;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
+.brand-mark{
+  width:22px;height:22px;border:1.5px solid var(--ink);border-radius:3px;
+  display:grid;grid-template-columns:repeat(6,1fr);position:relative;overflow:hidden;
+}
+.brand-mark::before,.brand-mark::after{content:"";position:absolute;left:0;right:0;height:1px;background:var(--ink)}
+.brand-mark::before{top:33%}
+.brand-mark::after{top:66%}
+.brand-mark span{border-right:1px solid var(--ink);height:100%}
+.brand-mark span:nth-child(6){border-right:0}
+.brand-mark i{
+  position:absolute;width:6px;height:6px;border-radius:50%;background:var(--accent);
+  top:calc(33% - 3px);left:calc(16.66% - 3px);
+}
+.brand-mark i:nth-child(8){top:calc(66% - 3px);left:calc(50% - 3px);background:var(--ink)}
+.brand-name{font-size:14px}
+.brand-tag{font-size:10.5px;font-weight:500;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;border-left:1px solid var(--rule);padding-left:10px;margin-left:2px}
+
+.titlebar .grow{flex:1}
+
+.tbar-meta{display:flex;align-items:center;gap:8px;color:var(--ink-3);font-size:11.5px;font-family:'JetBrains Mono',monospace}
+.tbar-meta .dot{width:6px;height:6px;border-radius:50%;background:var(--ok)}
+.tbar-meta .dot.err{background:var(--accent)}
+.tbar-meta .dot.warn{background:var(--warn)}
+
+.icon-btn{
+  height:28px;padding:0 10px;border:1px solid var(--rule);border-radius:4px;
+  background:var(--paper);display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;color:var(--ink);
+}
+.icon-btn:hover{border-color:var(--ink-3);background:#fff}
+
+/* ============ TOOLBAR (segmented) ============ */
+.toolbar{
+  display:flex;align-items:center;flex-wrap:wrap;gap:0;
+  padding:4px 8px;
+  border-bottom:1px solid var(--rule);
+  background:linear-gradient(to bottom,var(--paper),var(--bg));
+  row-gap:4px;
+}
+.tgroup{
+  display:flex;align-items:center;min-height:28px;
+  border-right:1px solid var(--rule);
+  padding:2px 8px;gap:6px;
+  flex-wrap:wrap;
+}
+.tgroup:last-child{border-right:0}
+@media (max-width: 900px){
+  .tgroup{border-right:0;border-bottom:1px dashed var(--rule-2);width:100%;justify-content:flex-start}
+  .tgroup:last-child{border-bottom:0}
+}
+.tgroup-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-3);font-weight:600;padding:0 4px}
+
+.seg{display:flex;border:1px solid var(--rule);border-radius:4px;overflow:hidden;background:var(--paper)}
+.seg button{
+  height:24px;padding:0 10px;border:0;background:transparent;
+  font-size:11.5px;font-weight:500;color:var(--ink-2);
+  border-right:1px solid var(--rule);
+  display:inline-flex;align-items:center;gap:5px;
+}
+.seg button:last-child{border-right:0}
+.seg button:hover{background:#fff;color:var(--ink)}
+.seg button.on{
+  background:var(--ink);color:var(--paper);
+}
+.seg button.on svg{stroke:var(--paper)}
+.seg button svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.5}
+
+.tselect{
+  height:24px;border:1px solid var(--rule);background:var(--paper);
+  border-radius:4px;padding:0 22px 0 8px;font-size:11.5px;color:var(--ink);
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'><path d='M1 3l3 3 3-3' fill='none' stroke='%231f1d1a' stroke-width='1.2'/></svg>");
+  background-repeat:no-repeat;background-position:right 6px center;
+}
+.tselect:hover{border-color:var(--ink-3)}
+
+.tinput{
+  height:24px;border:1px solid var(--rule);background:var(--paper);
+  border-radius:4px;padding:0 8px;font-size:11.5px;color:var(--ink);
+  font-family:'JetBrains Mono',monospace;
+  width:160px;
+}
+.tinput:focus{outline:none;border-color:var(--ink);background:#fff}
+
+.tbtn{
+  height:24px;padding:0 10px;border:1px solid var(--rule);background:var(--paper);
+  border-radius:4px;font-size:11.5px;color:var(--ink);
+  display:inline-flex;align-items:center;gap:5px;
+}
+.tbtn:hover{border-color:var(--ink-3);background:#fff}
+.tbtn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tbtn.primary:hover{background:#000}
+.tbtn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.5}
+
+/* ============ MAIN SPLIT ============ */
+.main{
+  display:grid;
+  grid-template-rows: 1fr 6px 1fr;
+  min-height:0;
+  background:var(--bg);
+}
+.pane{
+  min-height:0;
+  display:flex;flex-direction:column;
+  background:var(--paper);
+}
+.pane-head{
+  height:28px;flex:0 0 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 14px;
+  border-bottom:1px solid var(--rule-2);
+  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600;
+}
+.pane-head .crumbs{font-family:'JetBrains Mono',monospace;text-transform:none;letter-spacing:0;color:var(--ink-2);font-weight:500;font-size:11px}
+.pane-head .crumbs b{color:var(--ink);font-weight:600}
+.pane-head .crumbs span{color:var(--ink-3);margin:0 6px}
+
+.pane-body{flex:1;min-height:0;position:relative;overflow:auto}
+
+/* preview pane */
+#preview{
+  display:grid;
+  place-items:center;
+  padding:24px;
+  background:
+    repeating-linear-gradient(0deg,transparent 0 23px,rgba(31,29,26,.04) 23px 24px),
+    repeating-linear-gradient(90deg,transparent 0 23px,rgba(31,29,26,.04) 23px 24px),
+    var(--paper);
+}
+#preview > .stage{
+  background:#fff;
+  border:1px solid var(--rule);
+  box-shadow:var(--shadow);
+  padding:18px 22px;
+  min-width:280px;min-height:200px;
+  display:grid;place-items:center;
+  position:relative;
+}
+#preview svg{display:block;max-width:100%;height:auto}
+#preview .stage::before{
+  content:attr(data-label);
+  position:absolute;top:-8px;left:14px;
+  background:var(--paper);
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;color:var(--ink-3);
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:0 6px;
+}
+#preview.dark > .stage{background:#1c1f24;border-color:#2a2d33}
+#preview.dark .stage::before{background:var(--paper);color:var(--ink-3)}
+
+#preview .empty{
+  font-family:'JetBrains Mono',monospace;color:var(--ink-3);font-size:12px;
+  text-align:center;line-height:1.6;
+}
+#preview .empty kbd{
+  display:inline-block;background:var(--code-bg);border:1px solid var(--rule);
+  border-radius:3px;padding:0 5px;font-size:11px;color:var(--ink-2);
+}
+
+/* divider */
+.divider{
+  background:var(--rule);
+  cursor:row-resize;position:relative;
+  border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2);
+}
+.divider::after{
+  content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:36px;height:2px;background:var(--ink-3);border-radius:1px;opacity:.5;
+}
+.divider:hover::after{opacity:1;background:var(--ink)}
+
+/* editor pane */
+.editor-wrap{
+  flex:1;min-height:0;
+  display:grid;grid-template-columns: 44px 1fr;
+  font-family:'JetBrains Mono',monospace;font-size:12.5px;
+  background:var(--code-bg);
+  position:relative;
+}
+.gutter{
+  background:var(--code-bg);
+  color:var(--ink-3);
+  text-align:right;
+  padding:10px 8px 40px 0;
+  user-select:none;
+  font-size:11.5px;
+  line-height:1.55;
+  border-right:1px solid var(--rule-2);
+  overflow:hidden;
+  white-space:pre;
+}
+#code{
+  width:100%;height:100%;
+  border:0;outline:none;resize:none;
+  background:transparent;
+  padding:10px 16px 40px 12px;
+  font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.55;
+  color:var(--ink);
+  white-space:pre;
+  tab-size:2;
+}
+#code::selection{background:var(--code-sel)}
+
+.statusline{
+  position:absolute;left:0;right:0;bottom:0;
+  height:28px;
+  display:flex;align-items:center;gap:14px;
+  padding:0 14px;
+  background:var(--paper);
+  border-top:1px solid var(--rule-2);
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  color:var(--ink-3);
+}
+.statusline .err{color:var(--accent);font-weight:500}
+.statusline .ok{color:var(--ok);font-weight:500}
+.statusline .item{display:flex;align-items:center;gap:6px}
+.statusline .grow{flex:1}
+
+/* tuning chip row */
+.tuning-row{
+  display:flex;align-items:center;gap:6px;
+  padding:0 4px;
+}
+.tstring{
+  display:inline-flex;align-items:center;gap:0;
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  border:1px solid var(--rule);background:var(--paper);
+  border-radius:3px;height:22px;padding:0 6px;
+  color:var(--ink);
+}
+.tstring b{color:var(--ink);font-weight:600}
+.tstring i{color:var(--ink-3);font-style:normal;font-size:10px;margin-left:2px}
+
+/* toast */
+.toast{
+  position:fixed;left:50%;top:80px;transform:translateX(-50%) translateY(-10px);
+  background:var(--ink);color:var(--paper);
+  padding:8px 14px;border-radius:4px;font-size:12px;
+  font-family:'JetBrains Mono',monospace;
+  box-shadow:0 10px 30px -10px rgba(0,0,0,.3);
+  opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;
+  z-index:50;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* small helpers */
+.kbd{
+  display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10.5px;
+  background:rgba(31,29,26,.06);border:1px solid var(--rule);border-radius:3px;
+  padding:0 4px;color:var(--ink-3);
+}
+
+/* start-fret stepper */
+.step-btn{
+  width:18px;height:18px;border:1px solid var(--rule);border-radius:3px;
+  background:var(--paper);color:var(--ink);font-size:13px;line-height:1;
+  display:inline-flex;align-items:center;justify-content:center;padding:0;
+}
+.step-btn:hover{border-color:var(--ink-3);background:#fff}
+#sf-val{
+  width:32px;height:18px;text-align:center;font-family:'JetBrains Mono',monospace;
+  font-size:11px;border:1px solid var(--rule);border-radius:3px;background:var(--paper);
+  color:var(--ink);padding:0;
+}
+#sf-val:focus{outline:none;border-color:var(--ink);background:#fff}
+
+/* interactive overlays on the diagram */
+.fd-hit{transition:fill .12s}
+.fd-hit:hover{fill:rgba(185,74,58,0.18)!important}
+.fd-edit, .fd-edit-scale{pointer-events:auto}
+
+/* editable title overlay */
+.fd-title-edit{
+  position:absolute;
+  left:50%;top:6px;transform:translateX(-50%);
+  font-family:Inter,system-ui,sans-serif;
+  font-size:16px;font-weight:600;color:var(--ink);
+  text-align:center;outline:none;
+  border:1px dashed transparent;border-radius:3px;
+  padding:1px 8px;min-width:60px;
+  cursor:text;
+  background:transparent;
+  z-index:5;
+}
+.fd-title-edit:hover{border-color:var(--rule)}
+.fd-title-edit:focus{border-color:var(--ink);background:#fff}
+#preview.dark .fd-title-edit{color:var(--paper)}
+#preview.dark .fd-title-edit:focus{background:#262a30}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============ TITLEBAR ============ -->
+  <div class="titlebar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+        <i></i><i></i>
+      </span>
+      <span class="brand-name">Fretdrom</span>
+      <span class="brand-tag">Editor · v0.1</span>
+    </div>
+
+    <div class="grow"></div>
+
+    <div class="tbar-meta" id="meta">
+      <span class="dot" id="meta-dot"></span>
+      <span id="meta-text">ready</span>
+      <span style="color:var(--rule)">·</span>
+      <span id="meta-string-count">6 strings</span>
+    </div>
+
+    <button class="icon-btn" id="copy-json" title="Copy JSON5 source to clipboard">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 3H4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h1M11 3h1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-1"/></svg>
+      Copy JSON
+    </button>
+    <button class="icon-btn" id="copy-svg" title="Copy SVG to clipboard">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="4" width="9" height="9" rx="1"/><path d="M3 11V3a1 1 0 0 1 1-1h8"/></svg>
+      Copy SVG
+    </button>
+    <button class="icon-btn" id="download-svg" title="Download SVG">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 2v9m0 0l-3-3m3 3l3-3M3 13h10"/></svg>
+      SVG
+    </button>
+  </div>
+
+  <!-- ============ TOOLBAR ============ -->
+  <div class="toolbar">
+
+    <div class="tgroup">
+      <span class="tgroup-label">Type</span>
+      <div class="seg" id="seg-type">
+        <button data-type="chord" class="on">
+          <svg viewBox="0 0 16 16"><path d="M3 3h10v10H3z"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="10" cy="9" r="1" fill="currentColor"/></svg>
+          Chord
+        </button>
+        <button data-type="scale">
+          <svg viewBox="0 0 16 16"><path d="M3 3h10v10H3z"/><path d="M3 6h10M3 9h10M3 12h10"/></svg>
+          Scale
+        </button>
+        <button data-type="tab">
+          <svg viewBox="0 0 16 16"><path d="M2 4h12M2 7h12M2 10h12M2 13h12"/></svg>
+          Tablature
+        </button>
+      </div>
+    </div>
+
+    <div class="tgroup">
+      <span class="tgroup-label">Instrument</span>
+      <select class="tselect" id="preset-instrument">
+        <optgroup label="Guitar">
+          <option value="guitar-std">Guitar — Standard (E A D G B E)</option>
+          <option value="guitar-dropd">Guitar — Drop D (D A D G B E)</option>
+          <option value="guitar-dadgad">Guitar — DADGAD</option>
+          <option value="guitar-7">Guitar — 7-string (B E A D G B E)</option>
+        </optgroup>
+        <optgroup label="Bass">
+          <option value="bass-4">Bass — 4-string (E A D G)</option>
+          <option value="bass-5">Bass — 5-string (B E A D G)</option>
+          <option value="bass-6">Bass — 6-string (B E A D G C)</option>
+        </optgroup>
+        <optgroup label="Ukulele">
+          <option value="uke-soprano">Ukulele — Soprano re-entrant (G C E A)</option>
+          <option value="uke-low-g">Ukulele — Low G (G C E A)</option>
+          <option value="uke-baritone">Ukulele — Baritone (D G B E)</option>
+        </optgroup>
+        <optgroup label="Bouzouki">
+          <option value="bouz-irish">Bouzouki — Irish (G D A D)</option>
+          <option value="bouz-greek">Bouzouki — Greek trichordo (D A D)</option>
+          <option value="bouz-greek-tetra">Bouzouki — Greek tetrachordo (C F A D)</option>
+        </optgroup>
+        <optgroup label="Other">
+          <option value="mando">Mandolin (G D A E)</option>
+          <option value="custom">Custom…</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <div class="tgroup">
+      <span class="tgroup-label">Tuning</span>
+      <input class="tinput" id="tuning-input" value="E2 A2 D3 G3 B3 E4" spellcheck="false" />
+      <button class="tbtn" id="apply-tuning" title="Apply tuning to JSON">
+        <svg viewBox="0 0 16 16"><path d="M3 8l3 3 7-7"/></svg>
+        Apply
+      </button>
+    </div>
+
+    <div class="tgroup">
+      <span class="tgroup-label">Labels</span>
+      <div class="seg" id="seg-labels">
+        <button data-labels="auto" class="on">Auto</button>
+        <button data-labels="fingers">Fingers</button>
+        <button data-labels="intervals">Intervals</button>
+      </div>
+    </div>
+
+    <div class="tgroup">
+      <span class="tgroup-label">Skin</span>
+      <div class="seg" id="seg-skin">
+        <button data-skin="default" class="on">Default</button>
+        <button data-skin="dark">Dark</button>
+        <button data-skin="sketch">Sketch</button>
+      </div>
+    </div>
+
+    <div class="tgroup">
+      <span class="tgroup-label">Tools</span>
+      <button class="tbtn" id="auto-intervals" title="Compute interval labels from tuning + frets">
+        <svg viewBox="0 0 16 16"><path d="M3 13L8 3l5 10M5.5 9h5"/></svg>
+        Auto-Intervals
+      </button>
+      <select class="tselect" id="root-override" title="Override root note for interval calculation">
+        <option value="">Root: auto</option>
+        <option value="0">Root: C</option>
+        <option value="1">Root: C#</option>
+        <option value="2">Root: D</option>
+        <option value="3">Root: D#/Eb</option>
+        <option value="4">Root: E</option>
+        <option value="5">Root: F</option>
+        <option value="6">Root: F#</option>
+        <option value="7">Root: G</option>
+        <option value="8">Root: G#/Ab</option>
+        <option value="9">Root: A</option>
+        <option value="10">Root: A#/Bb</option>
+        <option value="11">Root: B</option>
+      </select>
+      <button class="tbtn" id="format-json" title="Pretty-print JSON5 (Cmd/Ctrl+S)">
+        <svg viewBox="0 0 16 16"><path d="M3 4h10M3 8h7M3 12h10"/></svg>
+        Format
+      </button>
+      <select class="tselect" id="examples">
+        <option value="">Load example…</option>
+        <optgroup label="Chords">
+          <option value="ex-c-maj">C Major (open)</option>
+          <option value="ex-f-barre">F Major (barre)</option>
+          <option value="ex-e-intervals">E Major with intervals</option>
+          <option value="ex-uke-c">Ukulele C Major</option>
+          <option value="ex-bass-e">Bass E (4-string)</option>
+        </optgroup>
+        <optgroup label="Scales">
+          <option value="ex-am-pent">A Minor Pentatonic</option>
+          <option value="ex-cmaj-scale">C Major scale (intervals)</option>
+        </optgroup>
+        <optgroup label="Tablature">
+          <option value="ex-riff">Intro riff</option>
+          <option value="ex-bouz">Bouzouki line</option>
+        </optgroup>
+      </select>
+    </div>
+
+  </div>
+
+  <!-- ============ MAIN SPLIT ============ -->
+  <div class="main" id="main">
+
+    <section class="pane">
+      <div class="pane-head">
+        <span>Preview</span>
+        <span class="crumbs" id="crumbs">
+          <b id="crumb-type">chord</b><span>/</span><span id="crumb-name">untitled</span><span>/</span><span id="crumb-skin">default</span>
+          <span id="start-fret-ctl" style="display:none;align-items:center;gap:6px;margin-left:10px">
+            <span style="color:var(--ink-3)">·</span>
+            <span style="text-transform:uppercase;letter-spacing:.08em;font-size:10px">Start fret</span>
+            <button class="step-btn" id="sf-dec" aria-label="decrease start fret">−</button>
+            <input id="sf-val" value="1" />
+            <button class="step-btn" id="sf-inc" aria-label="increase start fret">+</button>
+          </span>
+        </span>
+      </div>
+      <div class="pane-body" id="preview">
+        <div class="stage" data-label="render"><div class="empty">Awaiting source…</div></div>
+      </div>
+    </section>
+
+    <div class="divider" id="divider" title="Drag to resize"></div>
+
+    <section class="pane">
+      <div class="pane-head">
+        <span>Source · JSON5</span>
+        <span class="crumbs">
+          <span id="crumb-bytes">0 B</span><span>·</span><span id="crumb-lines">0 lines</span>
+        </span>
+      </div>
+      <div class="pane-body" style="padding:0;background:var(--code-bg)">
+        <div class="editor-wrap">
+          <div class="gutter" id="gutter">1</div>
+          <textarea id="code" spellcheck="false" autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+        </div>
+        <div class="statusline">
+          <span class="item" id="status-msg"><span class="ok">●</span> parsed cleanly</span>
+          <span class="grow"></span>
+          <span class="item" id="status-cursor">Ln 1, Col 1</span>
+          <span class="item">JSON5</span>
+          <span class="item"><span class="kbd">⌘S</span> format · <span class="kbd">⌘↵</span> render</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</div>
+
+<div class="toast" id="toast">copied</div>
+
+<script src="js/editor.js"></script>
+
+</body>
+</html>
