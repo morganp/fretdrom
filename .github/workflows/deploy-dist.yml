@@ -1,27 +1,49 @@
 name: Deploy dist branch
 
+# Publishes the browser bundles to the orphan `dist` branch so a web page can
+# load them from GitHub without cloning the repo, for example through
+# https://cdn.jsdelivr.net/gh/morganp/fretdrom@dist/fretdrom.min.js
+#
+# The editor (editor/index.html and editor/js) is published from the same
+# branch, which is why this runs build-editor rather than build.
+#
+# This is NOT an npm release. There is no npm publish step in this repo's
+# workflows; releasing to npm is a deliberate manual `npm publish`.
 on:
   push:
     branches: [main]
     tags: ['v*']
+
+# One deploy at a time, newest wins.
+concurrency:
+  group: deploy-dist
+  cancel-in-progress: true
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: 20
+          cache: npm
 
       - run: npm ci
-
+      - run: npm run lint
+      - run: npm test
       - run: npm run build-editor
+
+      - name: Stamp the build
+        run: |
+          {
+            echo "ref: ${GITHUB_REF_NAME}"
+            echo "commit: ${GITHUB_SHA}"
+            echo "version: $(node -p "require('./package.json').version")"
+          } > dist/BUILD.txt
 
       - name: Deploy dist/ to dist branch
         uses: peaceiris/actions-gh-pages@v4
@@ -33,3 +55,21 @@ jobs:
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: 'Deploy dist from ${{ github.sha }}'
+
+      # jsDelivr caches branch URLs for up to 12 hours, so ask it to refetch the
+      # moving @dist files right away. Tag URLs are immutable and need no purge.
+      - name: Purge jsDelivr cache for the dist branch
+        continue-on-error: true
+        run: |
+          for f in fretdrom.js fretdrom.min.js BUILD.txt index.html; do
+            curl -fsS "https://purge.jsdelivr.net/gh/${GITHUB_REPOSITORY}@dist/${f}" || true
+          done
+
+      # The dist branch is rewritten on every push, so a release tag gets its own
+      # immutable ref: .../fretdrom@dist-v0.1.0/fretdrom.min.js
+      - name: Pin dist for release tags
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          git fetch origin dist
+          git tag -f "dist-${GITHUB_REF_NAME}" FETCH_HEAD
+          git push -f origin "dist-${GITHUB_REF_NAME}"
