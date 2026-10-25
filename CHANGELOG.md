@@ -9,6 +9,13 @@ All notable changes to this project are documented here. The format follows [Kee
 - `docs/spec.md`: the fretdrom format specification. Level 0 is documented from the 0.4.1 code, quirks included; levels 1 and 2 and the normalised model are planned for 0.5.0.
 - `docs/score-draft.md`: draft specification of the `scoredrom` score container. Not implemented.
 
+## [0.4.2] - 2026-10-25
+
+### Fixed
+
+- `processAll` and `renderElement` never parsed the source, so every browser diagram failed with `Unknown type: undefined`; now parsed, and errors are shown in place (`pre.fretdrom-error`) as well as logged. `renderElement` also accepts JSON5 text.
+- README: removed the unimplemented `-h`/`--help` option, corrected the `num_frets` default and the chord `start_fret` description, and listed all four skins for `--skin`.
+
 ## [0.4.1] - 2026-10-25
 
 No change to the input syntax or to rendered output.
@@ -82,7 +89,8 @@ No change to the input syntax or to rendered output.
 - Scale orientation and tab dash handling.
 - A Minor intervals and the barre chord and pentatonic scale examples.
 
-[Unreleased]: https://github.com/morganp/fretdrom/compare/v0.4.1...HEAD
+[Unreleased]: https://github.com/morganp/fretdrom/compare/v0.4.2...HEAD
+[0.4.2]: https://github.com/morganp/fretdrom/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/morganp/fretdrom/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/morganp/fretdrom/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/morganp/fretdrom/compare/v0.2.0...v0.3.0

@@ -17,6 +17,7 @@ Bring fretdrom's repo hygiene level with drumdrom so both share one layout and o
 - [x] Generate the 97 `docs/images` from the fixtures, never by hand: the script above is the only writer. Regenerate on every release (`npm run docs` in the release steps in `CONTRIBUTING.md`), and add a CI step that runs `npm run docs` then `git diff --exit-code docs/images`, so a stale image fails the build
 - [x] Check `docs/*.md` only reference images the script produces (`chords.md`, `scales.md`, `skins.md`, README); fail the script on a missing fixture or an orphan image
 - [x] README loads the bundle from the `dist` branch via jsDelivr; `dist/` added to npm `files` with `prepublishOnly` build
+- [x] Browser path (`processAll`, `renderElement`) parses the source and shows errors in place (0.4.2)
 - [ ] Publish 0.4.1 to npm by hand (needs `npm login` and 2FA in your own terminal) so the unpkg URL stops returning 404. Tag `v0.4.1` is pushed
 
 ## Convergence with drumdrom and scores (layered format)

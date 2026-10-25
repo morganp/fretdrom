@@ -665,7 +665,7 @@ These are facts about the current behaviour that a reader could mistake for a ru
 
 | # | Quirk | Planned |
 | --- | --- | --- |
-| Q1 | The browser path (`<script type="fretdrom">` with `FretDrom.processAll`, and `FretDrom.renderElement`) never calls `parse`, so a source such as `{ chord: {...} }` fails with `Unknown type: undefined` and is logged with `console.error`. Only `FretDrom.renderSVG` and the Node API parse. Verified by calling `renderElement` with a stub element. | Fix is not part of this specification; the format is not affected. |
+| Q1 | Fixed in 0.4.2. Up to 0.4.1 the browser path (`<script type="fretdrom">` with `FretDrom.processAll`, and `FretDrom.renderElement`) never called `parse`, so every diagram failed with `Unknown type: undefined` and was only logged with `console.error`. From 0.4.2 `renderElement` parses (an object or JSON5 text) and `processAll` shows the error message in a `pre.fretdrom-error` in place of the diagram, and still logs it. | None; the format is not affected. |
 | Q2 | In a tab wave every character outside `0-9 a-z x X` is an empty position, including `.`, `-`, spaces and `\|`. | `\|` becomes a bar separator, `(` and `)` big fret delimiters (section 14). Other characters stay empty in lenient mode. |
 | Q3 | `x` is muted, so fret 33 has no spelling. | Big fret `(33)` (section 14.4). |
 | Q4 | Unknown characters in a chord `frets` string are muted strings; in a tab wave they are empty positions. | Same in lenient mode; errors in strict mode. |
@@ -1164,7 +1164,7 @@ Commands run from the repository root:
 - `require('./lib').renderSVG(json5.parse(example))` for the same examples, and for the seven `json5 fretdrom-invalid` examples, checking that each throws the message named in its `// error:` comment.
 - Assertions through `require('./lib')` for the tables of sections 4, 5, 6, 7, 8, 9 and 10: type detection precedence, the wrapped form dropping `name` and `tuning`, frets, fingers and intervals conversions, the subtitle table, the tuning table, the `start_fret` rule (including `start_fret: 1` rendering identically to no `start_fret`), `num_frets` and `start_fret` defaults, wave conversion, `config.bar` inner bar line counts for absent, 4, 2, 8, 0, -1 and `"4"`, SVG sizes (260 by 300 chord, 380 by 130 tab), skin resolution (`config.skin` over the CLI default, unknown name fallback, a row entry skin discarding row overrides), idempotence of `parse`.
 - `node bin/cli.js -h`, `--version`, a file with a semantic error, a file with a syntax error, a missing file, and `-o`: exit codes and stderr text as listed in section 11 (a semantic error is an uncaught stack trace with exit 1).
-- `require('./lib/render-element')(0, { chord: {...} }, stub)` throws `Unknown type: undefined`, confirming quirk Q1.
+- `require('./lib/render-element')(0, { chord: {...} }, stub)` threw `Unknown type: undefined` in 0.4.1, confirming quirk Q1 (fixed in 0.4.2, covered by `test/browser.test.js`).
 - The scripts used were throwaway files outside the repository. `npm test` and `npm run lint` were run and are green; `npm run docs` and `npm run update-snapshots` leave no diff, because this file adds no image.
 
 Items that could not be derived from code and are judgement calls: the proposed `time`/`steps_per_beat` defaults (14.3), the strict range checks (15.3), the big fret range (O8) and the error codes (15.4).

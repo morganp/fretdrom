@@ -29,9 +29,8 @@ fretdrom --input scale.json5 --output scale.svg
 ### Options
 
 - `-i`, `--input <path>`: Path to the JSON5 source file (required)
-- `-s`, `--skin <name>`: Skin name: `default` or `dark` (default: `default`)
+- `-s`, `--skin <name>`: Skin name: `default`, `dark`, `sketch` or `sketch-dark` (default: `default`). A `config.skin` in the source wins over this option
 - `-o`, `--output <path>`: Write to file instead of stdout
-- `-h`, `--help`: Show help message
 
 ### Export to PNG
 
@@ -65,12 +64,12 @@ fretdrom -i chord.json5 | npx @resvg/resvg-js-cli - chord.png
 </script>
 ```
 
-Fretdrom finds all `<script type="fretdrom">` elements and replaces each with an inline SVG.
+Fretdrom finds all `<script type="fretdrom">` elements and replaces each with an inline SVG. A diagram that fails to parse or render shows its error message in place (a `<pre class="fretdrom-error">`) and is logged to the console; the other diagrams on the page still render.
 
-`@dist` is a moving ref that tracks the latest build of `main` (CI asks jsDelivr to refresh it after each deploy, but a CDN edge can lag briefly). For a page you do not want to change under you, pin a release with the immutable ref `@dist-v0.4.1`:
+`@dist` is a moving ref that tracks the latest build of `main` (CI asks jsDelivr to refresh it after each deploy, but a CDN edge can lag briefly). For a page you do not want to change under you, pin a release with the immutable ref `@dist-v0.4.2`:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/morganp/fretdrom@dist-v0.4.1/fretdrom.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/gh/morganp/fretdrom@dist-v0.4.2/fretdrom.min.js" type="text/javascript"></script>
 ```
 
 For development, `npm run build` writes the bundles to `dist/` and `examples/index.html` can load `../dist/fretdrom.js` when opened with `?local`.
@@ -144,7 +143,7 @@ Use `intervals` to label each string's harmonic role inside the dots. When `inte
 | `fingers` | Finger number per string (string or array, `-`/`null` = omit) | _(none)_ |
 | `intervals` | Interval label per string, low to high (array, `null` = omit). Takes priority over `fingers` for dot labels | _(none)_ |
 | `root_strings` | 1-indexed string numbers to show in accent colour | _(none)_ |
-| `start_fret` | First fret shown. `1` draws a nut; higher values show a fret indicator | `1` |
+| `start_fret` | First fret shown when 2 or more, with a fret indicator and no nut. Omitted, `1` or `0` mean automatic: the lowest fretted note if it is fret 5 or higher, else a nut at fret 1 | _(automatic)_ |
 | `barre` | `{fret, from_string, to_string}` -- draws a barre bar | _(none)_ |
 
 See [docs/chords.md](docs/chords.md) for more chord examples with interval and finger subtitles.
@@ -265,7 +264,7 @@ Use interval names directly as grid cell values to label each dot. Any cell valu
 | `subtitle` | Second line below the title (e.g., intervals `R  b3  4  5  b7`) | _(none)_ |
 | `tuning` | String names low to high | `EADGBE` |
 | `start_fret` | Fret number of the first row | `1` |
-| `num_frets` | Height of the box in frets | `6` |
+| `num_frets` | Height of the box in frets | length of the first `grid` row |
 | `grid` | Array of rows, one per string | required |
 
 See [docs/scales.md](docs/scales.md) for more scale examples with interval subtitles.
