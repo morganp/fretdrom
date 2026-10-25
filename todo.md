@@ -1,0 +1,22 @@
+# Todo
+
+## Line up with drumdrom
+Bring fretdrom's repo hygiene level with drumdrom so both share one layout and one set of habits. Reference: https://github.com/morganp/drumdrom
+
+- [x] `LICENSE` (MIT) and `license` field in `package.json`
+- [x] `CHANGELOG.md` (Keep a Changelog, SemVer)
+- [ ] `CONTRIBUTING.md`: setup, `npm test`, `npm run lint`, snapshot update flow, release steps
+- [ ] `CLAUDE.md`: layout, commands, conventions (no em dashes, SemVer tags, never rewrite history)
+- [ ] `schema/fretdrom.schema.json`: JSON Schema 2020-12 for chord, scale and chords inputs, and a `validate` API that collects all errors with code, path, line and column
+- [ ] `docs/spec.md`: format specification with a version key, written from what `lib/parse.js` accepts today
+- [ ] `scripts/render-fixtures.js`: render fixtures to SVG; `npm run docs` writes `docs/images`, `npm run update-snapshots` writes `test/snapshots`
+- [ ] Snapshot tests: SVG output diffs show up in review (drumdrom `test/snapshots`)
+- [ ] `examples/index.html`: gallery page that loads the `dist` bundle
+- [ ] `.github/workflows/ci.yml`: lint, test and build on Node 20 and 22, push and pull request (keep `deploy-dist.yml` for the dist branch)
+- [ ] `package.json` `files`: add `schema/`, `docs/`; add `docs` and `update-snapshots` scripts
+- [ ] Decide docs image set: 97 images in `docs/images`; generate from fixtures instead of committing by hand
+- [ ] Confirm npm publish status: README points at `unpkg.com/fretdrom`; either publish or point at the `dist` branch
+
+## Shared with drumdrom
+- [ ] Extract common code (onml SVG helpers, wave string parsing, skins loader, error type) into one package once both stabilise
+- [ ] Keep skin names and CLI verbs (`render`, `validate`, `json`) identical across both
