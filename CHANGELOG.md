@@ -4,6 +4,11 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Added
+
+- `docs/spec.md`: the fretdrom format specification. Level 0 is documented from the 0.4.1 code, quirks included; levels 1 and 2 and the normalised model are planned for 0.5.0.
+- `docs/score-draft.md`: draft specification of the `scoredrom` score container. Not implemented.
+
 ## [0.4.1] - 2026-10-25
 
 No change to the input syntax or to rendered output.

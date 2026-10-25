@@ -364,6 +364,14 @@ const svg = renderSVG({ chord: { name: 'C Major', frets: 'x32010' } });
 
 ---
 
+## Docs
+
+- [docs/spec.md](docs/spec.md): the format specification. Describes what 0.4.1 accepts today, and the planned layered format (bars, `format`/`version`, normalised model) for 0.5.0.
+- [docs/score-draft.md](docs/score-draft.md): draft specification of the `scoredrom` score container (tab and drums on one timeline). Not implemented.
+- [docs/chords.md](docs/chords.md), [docs/scales.md](docs/scales.md), [docs/skins.md](docs/skins.md): galleries of examples.
+
+---
+
 ## Contributing
 
 The images under `docs/images` and the snapshots under `test/snapshots` are generated from `test/fixtures`; never edit them by hand. After a render change run `npm run docs` and `npm run update-snapshots` and commit the result, as CI checks they are current. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, tests and the release steps.

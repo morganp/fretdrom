@@ -8,7 +8,7 @@ Bring fretdrom's repo hygiene level with drumdrom so both share one layout and o
 - [x] `CONTRIBUTING.md`: setup, `npm test`, `npm run lint`, snapshot update flow, release steps
 - [x] `CLAUDE.md`: layout, commands, conventions (no em dashes, SemVer tags, never rewrite history)
 - [ ] `schema/fretdrom.schema.json`: JSON Schema 2020-12 for chord, scale and chords inputs, and a `validate` API that collects all errors with code, path, line and column
-- [ ] `docs/spec.md`: format specification with a version key, written from what `lib/parse.js` accepts today
+- [x] `docs/spec.md`: format specification with a version key, written from what `lib/parse.js` accepts today
 - [x] `scripts/render-fixtures.js`: render every `test/fixtures/*.json5` through each skin (default, dark, sketch, sketch dark); `npm run docs` writes `docs/images`, `npm run update-snapshots` writes `test/snapshots`. Today nothing in the repo generates the images, so they are committed by hand and drift
 - [x] Snapshot tests: SVG output diffs show up in review (drumdrom `test/snapshots`)
 - [x] `examples/index.html`: gallery page that loads the `dist` bundle
@@ -39,7 +39,7 @@ Rules:
 
 Tickets (order):
 1. [x] Hygiene against today's output (released as 0.4.1): `scripts/render-fixtures.js`, snapshot tests, `ci.yml`, `CONTRIBUTING.md`, `CLAUDE.md`, `examples/index.html`, `package.json` files and scripts, docs images generated from fixtures. Release 0.4.1 (npm publish stays manual, fixes the unpkg 404)
-2. [ ] `docs/spec.md` for fretdrom (levels 0 to 2) and a draft `scoredrom` spec
+2. [x] `docs/spec.md` for fretdrom (levels 0 to 2) and a draft `scoredrom` spec
 3. [ ] Create `dromkit`: errors, locate, wave scan, loader, skins, svg helpers, browser glue, ajv standalone validator build, shared schema defs
 4. [ ] Move drumdrom onto dromkit (snapshots byte identical); make `format` and `version` optional there too
 5. [ ] fretdrom levels 1 and 2: `time`, `tempo`, `subtitle`, `steps_per_beat`, `|` bars, `lanes`, `format`/`version`/`type`, schema + `validate()` with codes and line/column, CLI verbs `validate` and `json`, skin key aliases (`tab_*` to common keys)
