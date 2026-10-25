@@ -16,7 +16,8 @@ Bring fretdrom's repo hygiene level with drumdrom so both share one layout and o
 - [ ] `package.json` `files`: add `schema/`, `docs/`; add `docs` and `update-snapshots` scripts
 - [ ] Generate the 97 `docs/images` from the fixtures, never by hand: the script above is the only writer. Regenerate on every release (`npm run docs` in the release steps in `CONTRIBUTING.md`), and add a CI step that runs `npm run docs` then `git diff --exit-code docs/images`, so a stale image fails the build
 - [ ] Check `docs/*.md` only reference images the script produces (`chords.md`, `scales.md`, `skins.md`, README); fail the script on a missing fixture or an orphan image
-- [ ] Confirm npm publish status: README points at `unpkg.com/fretdrom`; either publish or point at the `dist` branch
+- [x] README loads the bundle from the `dist` branch via jsDelivr; `dist/` added to npm `files` with `prepublishOnly` build
+- [ ] Publish the next npm release (needs `npm login`) so the unpkg URL stops returning 404; tag `v0.4.1` at that time
 
 ## Shared with drumdrom
 - [ ] Extract common code (onml SVG helpers, wave string parsing, skins loader, error type) into one package once both stabilise

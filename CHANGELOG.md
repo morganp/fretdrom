@@ -4,6 +4,11 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Fixed
+
+- README script tag now loads the bundle from the `dist` branch through jsDelivr. The old unpkg URL returned 404 because the npm package did not include `dist/`.
+- `dist/` is now in the npm `files` list and `prepublishOnly` builds it, so `unpkg.com/fretdrom/dist/fretdrom.min.js` works from the next npm release.
+
 ### Added
 
 - `LICENSE` (MIT) and `license` field in `package.json`.

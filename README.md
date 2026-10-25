@@ -48,7 +48,7 @@ fretdrom -i chord.json5 | npx @resvg/resvg-js-cli - chord.png
 1. Add the script to your `<head>` or `<body>`:
 
 ```html
-<script src="https://unpkg.com/fretdrom/dist/fretdrom.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/gh/morganp/fretdrom@dist/fretdrom.min.js" type="text/javascript"></script>
 ```
 
 2. Call `processAll` on load:

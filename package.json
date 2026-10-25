@@ -11,11 +11,13 @@
     "bin/",
     "lib/",
     "skins/",
+    "dist/",
     "README.md",
     "LICENSE",
     "CHANGELOG.md"
   ],
   "scripts": {
+    "prepublishOnly": "npm run build",
     "test": "mocha test",
     "lint": "eslint lib bin skins test eslint.config.js",
     "dist": "esbuild ./lib/fretdrom.js --bundle --format=iife --global-name=FretDrom --outfile=dist/fretdrom.js",
