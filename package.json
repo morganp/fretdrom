@@ -19,11 +19,13 @@
   "scripts": {
     "prepublishOnly": "npm run build",
     "test": "mocha test",
-    "lint": "eslint lib bin skins test eslint.config.js",
+    "lint": "eslint lib bin skins scripts test eslint.config.js",
     "dist": "esbuild ./lib/fretdrom.js --bundle --format=iife --global-name=FretDrom --outfile=dist/fretdrom.js",
     "dist.min": "esbuild ./lib/fretdrom.js --bundle --format=iife --global-name=FretDrom --minify --outfile=dist/fretdrom.min.js",
     "build": "npm run dist && npm run dist.min",
-    "build-editor": "npm run build && cp editor/index.html dist/ && cp -r editor/js dist/"
+    "build-editor": "npm run build && cp editor/index.html dist/ && cp -r editor/js dist/",
+    "docs": "node scripts/render-fixtures.js docs/images",
+    "update-snapshots": "node scripts/render-fixtures.js test/snapshots"
   },
   "dependencies": {
     "json5": "^2.2.3",

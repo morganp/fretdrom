@@ -82,7 +82,7 @@ The `chord` key takes an object. Frets and fingers can be written as compact str
 }}
 ```
 
-![C Major chord diagram](docs/images/chord_c_major.svg)
+![C Major chord diagram](docs/images/c_major.svg)
 
 Fret characters: `x` = muted, `0` = open, `1`-`9` = fret number, `a`-`z` = frets 10-35 (a=10, b=11, c=12 ...).  
 Finger characters: `-` = no label, `1`-`4` = finger number.
@@ -99,7 +99,7 @@ Barre chords use the `barre` key:
 }}
 ```
 
-![F Major barre chord diagram](docs/images/chord_f_barre.svg)
+![F Major barre chord diagram](docs/images/f_barre.svg)
 
 Use `subtitle` to show intervals or any short annotation below the title:
 
@@ -121,7 +121,7 @@ Use `intervals` to label each string's harmonic role inside the dots. When `inte
 }}
 ```
 
-![E Major interval labels](docs/images/chord_e_major_intervals.svg)
+![E Major interval labels](docs/images/e_major_intervals.svg)
 
 `intervals` is an array -- one entry per string, low to high. Use `null` or omit entries for strings with no label (open strings, muted strings, or fretted strings you want unlabelled).
 
@@ -206,7 +206,7 @@ The `scale` key takes an object with a `grid` array -- one row per string, low t
 }}
 ```
 
-![A Minor Pentatonic scale diagram](docs/images/scale_a_minor_penta.svg)
+![A Minor Pentatonic scale diagram](docs/images/a_minor_penta.svg)
 
 Strings are columns along the top; fret numbers label each row down the left side. Fret position markers (3, 5, 7, 9, 12 ...) appear on the right.
 
@@ -240,7 +240,7 @@ Use interval names directly as grid cell values to label each dot. Any cell valu
 }}
 ```
 
-![A Minor Pentatonic interval labels](docs/images/scale_a_minor_penta_intervals.svg)
+![A Minor Pentatonic interval labels](docs/images/a_minor_penta_intervals.svg)
 
 | Cell value | Meaning |
 |------------|---------|
@@ -282,7 +282,7 @@ The `tab` key takes an array of string lanes -- one per string, highest to lowes
 }
 ```
 
-![Intro Riff tablature](docs/images/tab_intro_riff.svg)
+![Intro Riff tablature](docs/images/intro_riff.svg)
 
 Wave characters: `.` = empty beat (renders as dash), `0`-`9` = fret number, `a`-`z` = frets 10-35, `x` = muted.
 
@@ -306,7 +306,7 @@ Set `tuning` to match your instrument. String count is inferred from the frets o
 { chord: { name: "E (bass)", tuning: "EADG", frets: "0221", fingers: "-231", root_strings: [1] } }
 ```
 
-![E bass chord diagram](docs/images/chord_bass_e.svg)
+![E bass chord diagram](docs/images/bass_e.svg)
 
 Common tunings: `BEADG` (5-string bass), `GCEA` (ukulele), `GDAE` (mandola), `DADGAD` (open D).
 
@@ -320,13 +320,13 @@ The `config.skin` key selects a colour scheme:
 { chord: { name: "C Major", frets: "x32010", config: { skin: "dark" } } }
 ```
 
-![C Major dark skin](docs/images/chord_c_major_dark.svg)
+![C Major dark skin](docs/images/c_major_dark.svg)
 
 ```json5
 { chord: { name: "C Major", frets: "x32010", config: { skin: "sketch" } } }
 ```
 
-![C Major sketch skin](docs/images/chord_c_major_sketch.svg)
+![C Major sketch skin](docs/images/c_major_sketch.svg)
 
 | Skin | Description |
 |------|-------------|

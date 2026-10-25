@@ -18,7 +18,7 @@ Light background, charcoal lines, red root notes.
 
 | Chord | Barre | Scale | Tab |
 |-------|-------|-------|-----|
-| ![C Major](images/chord_c_major.svg) | ![F Major](images/chord_f_barre.svg) | ![A Minor Pentatonic](images/scale_a_minor_penta.svg) | ![Intro Riff](images/tab_intro_riff.svg) |
+| ![C Major](images/c_major.svg) | ![F Major](images/f_barre.svg) | ![A Minor Pentatonic](images/a_minor_penta.svg) | ![Intro Riff](images/intro_riff.svg) |
 
 ---
 
@@ -28,7 +28,7 @@ Dark background, light lines, bright red root notes.
 
 | Chord | Barre | Scale | Tab |
 |-------|-------|-------|-----|
-| ![C Major dark](images/chord_c_major_dark.svg) | ![F Major dark](images/chord_f_barre_dark.svg) | ![A Minor Pentatonic dark](images/scale_a_minor_penta_dark.svg) | ![Intro Riff dark](images/tab_intro_riff_dark.svg) |
+| ![C Major dark](images/c_major_dark.svg) | ![F Major dark](images/f_barre_dark.svg) | ![A Minor Pentatonic dark](images/a_minor_penta_dark.svg) | ![Intro Riff dark](images/intro_riff_dark.svg) |
 
 ---
 
@@ -38,7 +38,7 @@ Warm off-white background with hand-drawn wobbly lines. Fret wires, strings, and
 
 | Chord | Barre | Scale | Tab |
 |-------|-------|-------|-----|
-| ![C Major sketch](images/chord_c_major_sketch.svg) | ![F Major sketch](images/chord_f_barre_sketch.svg) | ![A Minor Pentatonic sketch](images/scale_a_minor_penta_sketch.svg) | ![Intro Riff sketch](images/tab_intro_riff_sketch.svg) |
+| ![C Major sketch](images/c_major_sketch.svg) | ![F Major sketch](images/f_barre_sketch.svg) | ![A Minor Pentatonic sketch](images/a_minor_penta_sketch.svg) | ![Intro Riff sketch](images/intro_riff_sketch.svg) |
 
 ---
 
@@ -48,7 +48,7 @@ Dark background with the same hand-drawn line style.
 
 | Chord | Barre | Scale | Tab |
 |-------|-------|-------|-----|
-| ![C Major sketch dark](images/chord_c_major_sketch_dark.svg) | ![F Major sketch dark](images/chord_f_barre_sketch_dark.svg) | ![A Minor Pentatonic sketch dark](images/scale_a_minor_penta_sketch_dark.svg) | ![Intro Riff sketch dark](images/tab_intro_riff_sketch_dark.svg) |
+| ![C Major sketch dark](images/c_major_sketch_dark.svg) | ![F Major sketch dark](images/f_barre_sketch_dark.svg) | ![A Minor Pentatonic sketch dark](images/a_minor_penta_sketch_dark.svg) | ![Intro Riff sketch dark](images/intro_riff_sketch_dark.svg) |
 
 ---
 

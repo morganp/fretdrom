@@ -69,7 +69,7 @@ const rules = {
 module.exports = [
   { ignores: ['dist/**', 'node_modules/**'] },
   {
-    files: ['lib/**/*.js', 'bin/**/*.js', 'skins/**/*.js', 'eslint.config.js'],
+    files: ['lib/**/*.js', 'bin/**/*.js', 'skins/**/*.js', 'scripts/**/*.js', 'eslint.config.js'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'commonjs',

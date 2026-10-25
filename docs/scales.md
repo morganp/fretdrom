@@ -26,7 +26,7 @@ Scale diagrams support a `subtitle` key for a text annotation below the title. G
 }}
 ```
 
-![A Minor Pentatonic](images/scale_a_minor_penta_sub.svg)
+![A Minor Pentatonic](images/a_minor_penta_sub.svg)
 
 Grid rows are strings low to high (E to e). Columns are fret positions starting at `start_fret`. Use `"R"` for the root note, `"x"` for other scale notes, and `"."` for empty positions.
 
@@ -54,7 +54,7 @@ Grid rows are strings low to high (E to e). Columns are fret positions starting 
 }}
 ```
 
-![G Major Scale](images/scale_g_major.svg)
+![G Major Scale](images/g_major_scale.svg)
 
 This is the standard three-notes-per-string pattern in position 2 (starting at fret 3). The `"R"` cells mark the root note G in red; all other scale tones use `"x"`.
 
@@ -82,7 +82,7 @@ Replace `"x"` with the interval name to label each dot. The subtitle auto-shows 
 }}
 ```
 
-![A Minor Pentatonic interval labels](images/scale_a_minor_penta_intervals.svg)
+![A Minor Pentatonic interval labels](images/a_minor_penta_intervals.svg)
 
 Any string other than `"R"`, `"x"`, `"."`, `"-"` is treated as an interval label and shown inside the dot. Root cells still use the accent colour; all other interval cells use the standard dot colour.
 

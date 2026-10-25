@@ -17,7 +17,7 @@ Chord diagrams support `fingers` for fingering labels, `intervals` for harmonic 
 }}
 ```
 
-![C Major](images/chord_c_major_sub.svg)
+![C Major](images/c_major_sub.svg)
 
 ---
 
@@ -33,7 +33,7 @@ Chord diagrams support `fingers` for fingering labels, `intervals` for harmonic 
 }}
 ```
 
-![G Major](images/chord_g_major.svg)
+![G Major](images/g_major.svg)
 
 ---
 
@@ -48,7 +48,7 @@ Chord diagrams support `fingers` for fingering labels, `intervals` for harmonic 
 }}
 ```
 
-![D Major](images/chord_d_major.svg)
+![D Major](images/d_major.svg)
 
 ---
 
@@ -66,7 +66,7 @@ Chord diagrams support `fingers` for fingering labels, `intervals` for harmonic 
 }}
 ```
 
-![A Minor](images/chord_am.svg)
+![A Minor](images/am.svg)
 
 ---
 
@@ -82,7 +82,7 @@ Chord diagrams support `fingers` for fingering labels, `intervals` for harmonic 
 }}
 ```
 
-![E Minor](images/chord_em.svg)
+![E Minor](images/em.svg)
 
 ---
 
@@ -101,7 +101,7 @@ Chord diagrams support `fingers` for fingering labels, `intervals` for harmonic 
 }}
 ```
 
-![F Major](images/chord_f_barre_sub.svg)
+![F Major](images/f_barre_sub.svg)
 
 ---
 
@@ -119,7 +119,7 @@ Chord diagrams support `fingers` for fingering labels, `intervals` for harmonic 
 }}
 ```
 
-![E bass](images/chord_bass_e.svg)
+![E bass](images/bass_e.svg)
 
 ---
 
@@ -137,7 +137,7 @@ Use `intervals` instead of `fingers` to show each string's harmonic role inside 
 }}
 ```
 
-![E Major intervals](images/chord_e_major_intervals.svg)
+![E Major intervals](images/e_major_intervals.svg)
 
 ### A Minor (intervals)
 
@@ -149,7 +149,7 @@ Use `intervals` instead of `fingers` to show each string's harmonic role inside 
 }}
 ```
 
-![A Minor intervals](images/chord_am_intervals.svg)
+![A Minor intervals](images/am_intervals.svg)
 
 `intervals` is an array of strings, one per string low to high. Use `null` for strings with no label (open, muted, or unlabelled fretted strings). Values can be any text: `"R"`, `"3"`, `"b3"`, `"b7"`, `"#5"`, etc.
 
