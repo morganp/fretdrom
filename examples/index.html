@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FretDrom demo</title>
+  <style>
+    body { font-family: Helvetica, Arial, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+    h2 { margin-top: 2rem; }
+    .gallery { display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start; }
+  </style>
+</head>
+<body>
+  <h1>FretDrom demo</h1>
+  <p>This page loads the hosted bundle from jsDelivr. To work offline or test local changes, run <code>npm run build</code> and open it with <code>?local</code> added to the URL.</p>
+
+  <h2>Chords</h2>
+  <div class="gallery">
+<script type="fretdrom">
+{ chord: { name: "C Major", tuning: "EADGBE", frets: "x32010", fingers: "-32-1-" } }
+</script>
+<script type="fretdrom">
+{ chord: { name: "A Minor", subtitle: "1 - b3 - 5", frets: "x02210", fingers: "--231-", root_strings: [4] } }
+</script>
+<script type="fretdrom">
+{ chord: { name: "F Major (barre)", frets: "133211", fingers: "134211", root_strings: [1, 6], barre: { fret: 1, from_string: 1, to_string: 6 } } }
+</script>
+<script type="fretdrom">
+{ chord: { name: "C Major", frets: "x32010", fingers: "-32-1-", config: { skin: "dark" } } }
+</script>
+<script type="fretdrom">
+{ chord: { name: "C Major", frets: "x32010", fingers: "-32-1-", config: { skin: "sketch" } } }
+</script>
+  </div>
+
+  <h2>Chord row</h2>
+<script type="fretdrom">
+{
+  tuning: "EADGBE",
+  chords: [
+    { name: "A Minor", frets: "x02210", fingers: "--231-" },
+    { name: "C Major", frets: "x32010", fingers: "-32-1-" },
+    { name: "G Major", frets: "320003", fingers: "21---3" }
+  ]
+}
+</script>
+
+  <h2>Scales</h2>
+  <div class="gallery">
+<script type="fretdrom">
+{
+  scale: {
+    name: "A Minor Pentatonic",
+    tuning: "EADGBE",
+    start_fret: 5,
+    num_frets: 5,
+    grid: [
+      ["R", ".", ".", "x", "."],
+      ["x", ".", ".", "x", "."],
+      ["x", ".", "x", ".", "."],
+      ["x", ".", "x", ".", "."],
+      ["x", ".", "x", ".", "."],
+      ["R", ".", ".", "x", "."]
+    ]
+  }
+}
+</script>
+<script type="fretdrom">
+{
+  scale: {
+    name: "G Major Scale",
+    subtitle: "R  2  3  4  5  6  7",
+    tuning: "EADGBE",
+    start_fret: 3,
+    num_frets: 5,
+    grid: [
+      ["R", ".", "x", ".", "x"],
+      ["x", ".", "x", ".", "x"],
+      [".", "x", "R", ".", "x"],
+      [".", "x", "x", ".", "x"],
+      ["x", ".", "x", ".", "x"],
+      ["R", ".", "x", ".", "x"]
+    ]
+  }
+}
+</script>
+  </div>
+
+  <h2>Tab</h2>
+<script type="fretdrom">
+{
+  name: "Intro Riff",
+  tab: [
+    { name: "e", wave: "03.0...." },
+    { name: "B", wave: "2.2....." },
+    { name: "G", wave: "....2.3." },
+    { name: "D", wave: "........" },
+    { name: "A", wave: "........" },
+    { name: "E", wave: "........" }
+  ],
+  config: { bar: 4 }
+}
+</script>
+
+<script>
+  // Hosted bundle by default. Add ?local to the URL to load ../dist/fretdrom.js
+  // instead (needs npm run build, works offline).
+  document.write('<script src="' + (/[?&]local\b/.test(location.search)
+    ? '../dist/fretdrom.js'
+    : 'https://cdn.jsdelivr.net/gh/morganp/fretdrom@dist/fretdrom.min.js') + '"><\/script>');
+</script>
+<script>FretDrom.processAll();</script>
+</body>
+</html>
